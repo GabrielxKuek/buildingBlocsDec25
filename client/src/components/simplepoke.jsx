@@ -22,7 +22,7 @@ const progress = (foodSaved / 300) * 100;
       <img
         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`}
         alt="pokemon"
-        className="w-80 h-80"
+        className={"w-80 h-80 animate-float"}
       />
 
       {/* Progress Bar */}      
