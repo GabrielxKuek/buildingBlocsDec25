@@ -17,6 +17,8 @@
 import "./App.css";
 import { Container, AppBar, Toolbar, Typography } from "@mui/material";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Map from "./pages/Map";
+import Events from "./pages/Events";
 function App() {
   return (
     <Router>
@@ -28,16 +30,20 @@ function App() {
                 Learning
               </Typography>
             </Link>
-            <Link to="/tutorials">
-              <Typography>Tutorials</Typography>
+            <Link to="/map">
+              <Typography>Map</Typography>
+            </Link>
+            <Link to="/events">
+              <Typography>Events</Typography>
             </Link>
           </Toolbar>
         </Container>
       </AppBar>
       <Container>
         <Routes>
-          <Route path={"/"} />
-          <Route path={"/tutorials"} />
+          <Route path={"/"} element={<Map />} />
+          <Route path={"/map"} element={<Map />} />
+          <Route path={"/events"} element={<Events />} />
         </Routes>
       </Container>
     </Router>
