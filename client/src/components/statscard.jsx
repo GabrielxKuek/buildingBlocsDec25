@@ -28,17 +28,17 @@ function StatsCard({ indvfoodSaved, indvfoodDonated }) {
 
       <div className="bg-purple-100 flex justify-between">
         <div>Your Food Saved:</div>
-        <div className="font-semibold">{indvfoodSaved} kg</div>
+        <div>{indvfoodSaved} kg</div>
       </div>
 
       <div className="bg-purple-100 flex justify-between">
         <div>Your Food Donated:</div>
-        <div className="font-semibold">{indvfoodDonated} kg</div>
+        <div>{indvfoodDonated} kg</div>
       </div>
 
       <div className="bg-purple-100 flex justify-between">
         <div>Meals Equivalent:</div>
-        <div className="font-semibold">{meals} meals</div>
+        <div>{meals} meals</div>
       </div>
 
       <div className="bg-blue-100 p-2 rounded-md mt-3">

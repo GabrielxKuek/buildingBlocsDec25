@@ -19,8 +19,8 @@ function Leaderboard(){
             key={index}
             className="flex justify-between p-3 bg-gray-100 rounded-md"
           >
-            <div>{index + 1}. {user.name}</div>
-            <div className="font-bold">{user.amount} kg</div>
+            <div className="font-bold">{index + 1}. {user.name}</div>
+            <div>{user.amount} kg</div>
           </li>
         ))}
       </ul>
