@@ -784,16 +784,35 @@ const MapViewer3D = () => {
       <div ref={containerRef} className="flex-1 w-full" style={{ height: 'calc(100vh - 80px)' }} />
       
       {showNotification && (
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-white rounded-xl shadow-lg px-6 py-3 flex items-center gap-3 max-w-md z-50 animate-slideDown">
-          <MapPin className="w-5 h-5 text-red-500 flex-shrink-0" />
-          <span className="text-sm font-medium text-gray-800">Locations around you with food</span>
+        <div className="fixed inset-0 bg-gradient-to-br from-blue-500 to-blue-600 z-50 flex flex-col items-center justify-center p-6 animate-fadeIn">
           <button 
             onClick={() => setShowNotification(false)}
-            className="ml-2 p-1 hover:bg-gray-100 rounded-full transition-colors"
+            className="absolute top-6 right-6 w-12 h-12 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-all shadow-lg"
             aria-label="Close notification"
           >
-            <X className="w-4 h-4 text-gray-600" />
+            <X className="w-6 h-6 text-white" />
           </button>
+          
+          <div className="flex flex-col items-center text-center max-w-md space-y-6">
+            <div className="bg-white/20 backdrop-blur-md rounded-full p-6 shadow-2xl">
+              <MapPin className="w-16 h-16 text-white" />
+            </div>
+            
+            <h1 className="text-4xl font-bold text-white leading-tight">
+              Locations Around You With Food
+            </h1>
+            
+            <p className="text-lg text-white/90 leading-relaxed">
+              Discover available food donations in your area. Use the joystick to explore and tap on pins to see details.
+            </p>
+            
+            <button 
+              onClick={() => setShowNotification(false)}
+              className="mt-4 bg-white text-blue-600 px-8 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all"
+            >
+              Start Exploring
+            </button>
+          </div>
         </div>
       )}
       
@@ -888,18 +907,16 @@ const MapViewer3D = () => {
       )}
       
       <style jsx>{`
-        @keyframes slideDown {
+        @keyframes fadeIn {
           from {
             opacity: 0;
-            transform: translate(-50%, -20px);
           }
           to {
             opacity: 1;
-            transform: translate(-50%, 0);
           }
         }
-        .animate-slideDown {
-          animation: slideDown 0.3s ease-out;
+        .animate-fadeIn {
+          animation: fadeIn 0.3s ease-out;
         }
       `}</style>
     </div>
