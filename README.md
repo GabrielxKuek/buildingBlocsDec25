@@ -48,6 +48,8 @@ How to create map IDs. (2025). Google for Developers. https://developers.google.
 
 ‌Community Fridges | Recyclopedia.sg. (2023). Recyclopedia.sg. https://recyclopedia.sg/resources/community-fridges
 
+Pokemon images used in this project are provided by PokeAPI:
+https://github.com/PokeAPI/sprites
 ‌
 ‌
 
