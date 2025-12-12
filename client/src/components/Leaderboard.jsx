@@ -1,14 +1,13 @@
-import React from "react";
-import { Trophy, Medal } from "lucide-react";
+import { Trophy } from "lucide-react";
 
 function Leaderboard() {
   // Sample leaderboard data
   const leaderboardData = [
-    { rank: 1, name: "Sarah Chen", foodSaved: 45, foodDonated: 38 },
-    { rank: 2, name: "Michael Tan", foodSaved: 42, foodDonated: 35 },
-    { rank: 3, name: "Priya Kumar", foodSaved: 38, foodDonated: 32 },
-    { rank: 4, name: "David Lim", foodSaved: 35, foodDonated: 28 },
-    { rank: 5, name: "Emily Wong", foodSaved: 32, foodDonated: 25 },
+    { rank: 1, name: "Naruto Uzumaki", foodSaved: 45, foodDonated: 38 },
+    { rank: 2, name: "Pubert", foodSaved: 42, foodDonated: 35 },
+    { rank: 3, name: "Kevin", foodSaved: 38, foodDonated: 32 },
+    { rank: 4, name: "Kevin 2", foodSaved: 35, foodDonated: 28 },
+    { rank: 5, name: "Kevin 3", foodSaved: 32, foodDonated: 25 },
   ];
 
   const getRankBadge = (rank) => {

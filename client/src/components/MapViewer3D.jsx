@@ -417,49 +417,15 @@ const MapViewer3D = () => {
         object.scale.set(1.5, 1.5, 1.5);
         object.position.set(0, 0, 0);
         
-        const meshParts = {
-          leftArm: null,
-          rightArm: null,
-          leftLeg: null,
-          rightLeg: null,
-          body: null
-        };
-        
-        let meshCount = 0;
         object.traverse((child) => {
           if (child instanceof THREE.Mesh) {
-            meshCount++;
             child.castShadow = true;
             child.receiveShadow = true;
-            
             child.material = new THREE.MeshStandardMaterial({
               map: modelTexture,
               roughness: 0.7,
               metalness: 0.1
             });
-            
-            const name = child.name.toLowerCase();
-            
-            if ((name.includes('left') || name.includes('l_') || name.includes('_l')) && 
-                (name.includes('arm') || name.includes('hand') || name.includes('shoulder'))) {
-              meshParts.leftArm = child;
-            } 
-            else if ((name.includes('right') || name.includes('r_') || name.includes('_r')) && 
-                     (name.includes('arm') || name.includes('hand') || name.includes('shoulder'))) {
-              meshParts.rightArm = child;
-            }
-            else if ((name.includes('left') || name.includes('l_') || name.includes('_l')) && 
-                     (name.includes('leg') || name.includes('foot') || name.includes('thigh'))) {
-              meshParts.leftLeg = child;
-            }
-            else if ((name.includes('right') || name.includes('r_') || name.includes('_r')) && 
-                     (name.includes('leg') || name.includes('foot') || name.includes('thigh'))) {
-              meshParts.rightLeg = child;
-            }
-            
-            if (!child.userData.originalRotation) {
-              child.userData.originalRotation = child.rotation.clone();
-            }
           }
         });
         
@@ -467,8 +433,6 @@ const MapViewer3D = () => {
           animationTime: 0,
           bobAmount: 0.06,
           bobSpeed: 12,
-          meshParts: meshParts,
-          isSingleMesh: meshCount === 1
         };
         
         scene.add(object);

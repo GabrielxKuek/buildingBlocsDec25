@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { MapPin, Calendar, Package, Image as ImageIcon } from 'lucide-react'
 import { Button } from './ui/button'
 import { Input } from './ui/input'

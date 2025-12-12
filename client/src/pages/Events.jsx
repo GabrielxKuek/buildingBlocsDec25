@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -16,12 +16,10 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-// removed Google Maps picker import - MapPicker removed from modal
 
 const cardData = [
   {
     title: "SUSS Discovery Dinner",
-    // place your flyer image in `client/public/img/sussdinner.jpeg` and reference it as below
     image: "/img/sussdinner.jpeg",
     body: "Networking dinner event for SUSS students to learn about Social Capital.",
     date: "27 November 2025",
@@ -176,8 +174,6 @@ function Events() {
     });
     closeAdd();
   };
-
-  // Note: Map picker removed from modal - user requested simpler form without lat/lng
 
   const openImageDialog = (src, title) => {
     setCurrentImage({ src, title });
@@ -346,14 +342,12 @@ function Events() {
               onChange={(e) => handleFormChange("leftover", e.target.value)}
               fullWidth
             />
-            {/* latitude/longitude inputs removed per request */}
             <input
               type="file"
               accept="image/*"
               onChange={(e) => handleImageFile(e.target.files?.[0])}
             />
 
-            {/* embedded map picker removed */}
           </Stack>
         </DialogContent>
         <DialogActions>
