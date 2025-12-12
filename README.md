@@ -1,5 +1,8 @@
-Project Features and Functionalities
+# FoodShare
 
+A consumer-to-consumer (C2C) platform connecting those with surplus food to those who need it, reducing waste while building a community.
+
+Project Features and Functionalities:
 1) Dashboard - To display leftover food
 2) Interactive Community Fridge Map - To discover nearest community fridges
 3) Events - To display and add events that are giving away leftover food
