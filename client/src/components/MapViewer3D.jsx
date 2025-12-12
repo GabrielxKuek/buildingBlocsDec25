@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
-import { Package, Calendar, MapPin } from 'lucide-react';
+import { Package, Calendar, MapPin, X } from 'lucide-react';
 
 const MapViewer3D = () => {
   const containerRef = useRef(null);
@@ -24,6 +24,7 @@ const MapViewer3D = () => {
   const [heading, setHeading] = useState(0);
   const [joystickActive, setJoystickActive] = useState(false);
   const [selectedFood, setSelectedFood] = useState(null);
+  const [showNotification, setShowNotification] = useState(true);
   const [foodItems, setFoodItems] = useState([
     {
       id: 1,
@@ -75,7 +76,7 @@ const MapViewer3D = () => {
   const createFallbackCharacter = (scene) => {
     const characterGroup = new THREE.Group();
     
-    const bodyGeometry = new THREE.CapsuleGeometry(0.3, 0.8, 4, 8);
+    const bodyGeometry = new THREE.CapsuleGeometry(0.2, 0.5, 4, 8);
     const bodyMaterial = new THREE.MeshStandardMaterial({ 
       color: 0xff6b6b,
       roughness: 0.7,
@@ -83,10 +84,10 @@ const MapViewer3D = () => {
     });
     const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
     body.castShadow = true;
-    body.position.y = 0.8;
+    body.position.y = 0.5;
     characterGroup.add(body);
     
-    const headGeometry = new THREE.SphereGeometry(0.25, 16, 16);
+    const headGeometry = new THREE.SphereGeometry(0.15, 16, 16);
     const headMaterial = new THREE.MeshStandardMaterial({ 
       color: 0xffd93d,
       roughness: 0.6,
@@ -94,21 +95,21 @@ const MapViewer3D = () => {
     });
     const head = new THREE.Mesh(headGeometry, headMaterial);
     head.castShadow = true;
-    head.position.y = 1.5;
+    head.position.y = 0.9;
     characterGroup.add(head);
     
-    const eyeGeometry = new THREE.SphereGeometry(0.05, 8, 8);
+    const eyeGeometry = new THREE.SphereGeometry(0.03, 8, 8);
     const eyeMaterial = new THREE.MeshStandardMaterial({ color: 0x000000 });
     const leftEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
-    leftEye.position.set(-0.1, 1.55, 0.2);
+    leftEye.position.set(-0.06, 0.93, 0.12);
     characterGroup.add(leftEye);
     const rightEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
-    rightEye.position.set(0.1, 1.55, 0.2);
+    rightEye.position.set(0.06, 0.93, 0.12);
     characterGroup.add(rightEye);
     
     characterGroup.userData = { 
       animationTime: 0,
-      bobAmount: 0.05,
+      bobAmount: 0.03,
       bobSpeed: 12
     };
     
@@ -342,8 +343,8 @@ const MapViewer3D = () => {
       0.1,
       100
     );
-    camera.position.set(0, 2.5, 4);
-    camera.lookAt(0, 1.5, -2);
+    camera.position.set(0, 3.5, 5);
+    camera.lookAt(0, 0.5, -3);
     cameraRef.current = camera;
 
     const updateSize = () => {
@@ -397,7 +398,7 @@ const MapViewer3D = () => {
     loader.load(
       '/user.obj',
       (object) => {
-        object.scale.set(2.5, 2.5, 2.5);
+        object.scale.set(1.5, 1.5, 1.5);
         object.position.set(0, 0, 0);
         
         const meshParts = {
@@ -448,7 +449,7 @@ const MapViewer3D = () => {
         
         object.userData = { 
           animationTime: 0,
-          bobAmount: 0.1,
+          bobAmount: 0.06,
           bobSpeed: 12,
           meshParts: meshParts,
           isSingleMesh: meshCount === 1
@@ -782,9 +783,23 @@ const MapViewer3D = () => {
     <div className="relative w-full h-full bg-gray-900 flex flex-col">
       <div ref={containerRef} className="flex-1 w-full" style={{ height: 'calc(100vh - 80px)' }} />
       
+      {showNotification && (
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-white rounded-xl shadow-lg px-6 py-3 flex items-center gap-3 max-w-md z-50 animate-slideDown">
+          <MapPin className="w-5 h-5 text-red-500 flex-shrink-0" />
+          <span className="text-sm font-medium text-gray-800">Locations around you with food</span>
+          <button 
+            onClick={() => setShowNotification(false)}
+            className="ml-2 p-1 hover:bg-gray-100 rounded-full transition-colors"
+            aria-label="Close notification"
+          >
+            <X className="w-4 h-4 text-gray-600" />
+          </button>
+        </div>
+      )}
+      
       <div 
         ref={joystickRef}
-        className="absolute left-8 bg-white/30 backdrop-blur-sm rounded-full shadow-2xl cursor-pointer touch-none"
+        className="absolute left-1/2 -translate-x-1/2 bg-white/30 backdrop-blur-sm rounded-full shadow-2xl cursor-pointer touch-none"
         style={{ 
           bottom: '120px',
           width: '100px', 
@@ -804,11 +819,6 @@ const MapViewer3D = () => {
             border: '2px solid rgba(255, 255, 255, 0.8)'
           }}
         />
-      </div>
-
-      <div className="absolute left-1/2 -translate-x-1/2 bg-green-400 text-white px-6 py-3 rounded-full shadow-2xl text-sm font-bold uppercase tracking-wider"
-            style={{ bottom: '120px' }}>
-        Walk into a location to learn more about available food
       </div>
       
       {selectedFood && (
@@ -876,6 +886,22 @@ const MapViewer3D = () => {
           </div>
         </div>
       )}
+      
+      <style jsx>{`
+        @keyframes slideDown {
+          from {
+            opacity: 0;
+            transform: translate(-50%, -20px);
+          }
+          to {
+            opacity: 1;
+            transform: translate(-50%, 0);
+          }
+        }
+        .animate-slideDown {
+          animation: slideDown 0.3s ease-out;
+        }
+      `}</style>
     </div>
   );
 };

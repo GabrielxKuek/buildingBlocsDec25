@@ -15,6 +15,8 @@ export default function CreatePostForm({ onSubmit, onCancel }) {
     expiryDate: ''
   })
 
+  const [imageFile, setImageFile] = useState(null)      // ← NEW
+
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData(prev => ({
@@ -25,11 +27,15 @@ export default function CreatePostForm({ onSubmit, onCancel }) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+
     onSubmit({
       ...formData,
+      imageFile: imageFile || null,       // ← PASS FILE TO PARENT
       id: Date.now(),
       createdAt: new Date().toISOString()
     })
+
+    // Reset form
     setFormData({
       title: '',
       description: '',
@@ -38,6 +44,7 @@ export default function CreatePostForm({ onSubmit, onCancel }) {
       imageUrl: '',
       expiryDate: ''
     })
+    setImageFile(null)
   }
 
   return (
@@ -59,7 +66,7 @@ export default function CreatePostForm({ onSubmit, onCancel }) {
         <Textarea
           id="description"
           name="description"
-          placeholder="Describe the food item, condition, and any other relevant details..."
+          placeholder="Describe the food item..."
           value={formData.description}
           onChange={handleChange}
           rows={4}
@@ -113,10 +120,30 @@ export default function CreatePostForm({ onSubmit, onCancel }) {
         />
       </div>
 
+      {/* NEW: Image Upload */}
+      <div className="space-y-2">
+        <Label htmlFor="imageUpload">
+          <ImageIcon className="inline w-4 h-4 mr-1" />
+          Upload Image
+        </Label>
+        <Input
+          id="imageUpload"
+          type="file"
+          accept="image/*"
+          onChange={(e) => setImageFile(e.target.files[0])}
+        />
+        {imageFile && (
+          <p className="text-sm text-green-600">
+            Selected: {imageFile.name}
+          </p>
+        )}
+      </div>
+
+      {/* Keep existing Image URL input (optional fallback) */}
       <div className="space-y-2">
         <Label htmlFor="imageUrl">
           <ImageIcon className="inline w-4 h-4 mr-1" />
-          Image URL
+          Image URL (optional)
         </Label>
         <Input
           id="imageUrl"
