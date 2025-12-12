@@ -1,4 +1,6 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import React from 'react';
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import TestPage from './pages/TestPage';
 import ErrorPage from './pages/ErrorPage';
 import Dashboard from './pages/Dashboard';

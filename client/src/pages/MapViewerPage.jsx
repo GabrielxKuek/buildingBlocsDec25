@@ -1,4 +1,4 @@
-import MapViewer3D from "@/components/MapViewer3d";
+import MapViewer3D from '../components/MapViewer3D';
 
 const MapViewerPage = () => {
   return (
