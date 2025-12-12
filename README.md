@@ -48,6 +48,8 @@ How to create map IDs. (2025). Google for Developers. https://developers.google.
 
 ‌Community Fridges | Recyclopedia.sg. (2023). Recyclopedia.sg. https://recyclopedia.sg/resources/community-fridges
 
+Community Fridges in Singapore – Google My Maps. (2025). Google My Maps. https://www.google.com/maps/d/viewer?mid=10V_JH-yzZs6s2_LFaSfbRDmve6E4IrpJ&ll=1.3709181287247019%2C103.86369996569114&z=12
+
 Pokemon images used in this project are provided by PokeAPI:
 https://github.com/PokeAPI/sprites
 ‌
