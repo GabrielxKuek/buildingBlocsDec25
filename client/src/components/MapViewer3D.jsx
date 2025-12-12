@@ -783,7 +783,7 @@ const MapViewer3D = () => {
             </h1>
             
             <p className="text-lg text-white/90 leading-relaxed">
-              Discover available food donations in your area. Use the joystick to explore and tap on pins to see details.
+              Discover available food donations in your area. Use the joystick to explore and walk into on pins on the map to see details.
             </p>
             
             <button 
