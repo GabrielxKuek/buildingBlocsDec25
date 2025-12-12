@@ -1,5 +1,3 @@
-group writeup here
-
 Project Features and Functionalities
 
 1) Dashboard - To display leftover food
